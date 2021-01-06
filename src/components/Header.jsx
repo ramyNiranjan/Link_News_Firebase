@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   Flex,
   chakra,
   Box,
   useMediaQuery,
-  Button,
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
