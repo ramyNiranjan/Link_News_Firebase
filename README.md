@@ -1,3 +1,3 @@
-# Lin News 
+# Link News 
 
 
