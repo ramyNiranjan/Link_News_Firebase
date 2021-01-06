@@ -1,11 +1,11 @@
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
-  authDomain: process.env.REACT_APP_AUTHDOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASEURL,
-  projectId: process.env.REACT_APP_PROJECTID,
-  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGINSENDERID,
-  appId: process.env.REACT_APP_APPID,
+  authDomain: "hacket-clone.firebaseapp.com",
+  databaseURL: "https://hacket-clone.firebaseio.com",
+  projectId: "hacket-clone",
+  storageBucket: "hacket-clone.appspot.com",
+  messagingSenderId: "789327345737",
+  appId: "1:789327345737:web:b91506675d884aea64a798",
 };
 
 export default firebaseConfig;
