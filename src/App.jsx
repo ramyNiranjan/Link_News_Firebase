@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
+import SignUp from "./components/auth/SignUp";
+import SignIn from "./components/auth/SignIn";
 // import CreateLink from "./components/Link/CreateLink";
 import Home from "./Home";
 import CreateLink from "./components/CreateLink";

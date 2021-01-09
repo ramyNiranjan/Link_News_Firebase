@@ -9,26 +9,21 @@ import {
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 
-import { ChakraLink } from "./Header";
-import Layout from "./Layout";
-import FormAtom from "./FormAtom";
-import { useAuth } from "../hooks/useAuth";
+import { ChakraLink } from "../layout/Header";
+import Layout from "../layout/Layout";
+import FormAtom from "../FormAtom";
+import { useAuth } from "../../hooks/useAuth";
 import EmailResetModal from "./EmailResetModal";
-
-const schema = yup.object().shape({
-  Email: yup.string().required().email().max(30),
-  Password: yup.string().required(),
-});
+import { schemaSignIn } from "../../utils/validationSchema";
 
 export default function SignIn() {
   const [emailResendError, setEmailResendError] = useState("");
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleSubmit, register, errors, setError } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaSignIn),
   });
   const { signin, sendPasswordResetEmail } = useAuth();
   const history = useHistory();

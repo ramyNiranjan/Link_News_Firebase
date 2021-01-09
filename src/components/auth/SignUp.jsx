@@ -3,16 +3,16 @@ import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useForm } from "react-hook-form";
-import { ChakraLink } from "./Header";
-import Layout from "./Layout";
-import FormAtom from "./FormAtom";
-import { useAuth } from "../hooks/useAuth";
-import { schema } from "../utils/signUpSchema";
+import { ChakraLink } from "../layout/Header";
+import Layout from "../layout/Layout";
+import FormAtom from "../FormAtom";
+import { useAuth } from "../../hooks/useAuth";
+import { schemaSignUp } from "../../utils/validationSchema";
 import { useHistory } from "react-router-dom";
 
 export default function SignUp() {
   const { handleSubmit, register, errors } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaSignUp),
   });
   const { signup } = useAuth();
   const history = useHistory();
@@ -37,8 +37,8 @@ export default function SignUp() {
         <Text fontSize="2xl" align="center">
           Registor
         </Text>
-        {formValues.map((name) => (
-          <FormAtom name={name} register={register} errors={errors} />
+        {formValues.map((name, idx) => (
+          <FormAtom key={idx} name={name} register={register} errors={errors} />
         ))}
 
         <Flex align="baseline" w="100%">

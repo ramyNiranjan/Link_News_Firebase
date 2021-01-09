@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App.jsx";
-import AuthProvider from "./components/AuthProvider.jsx";
+import AuthProvider from "./components/auth/AuthProvider.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
