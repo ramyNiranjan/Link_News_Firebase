@@ -8,7 +8,7 @@ import {
   useToast,
   Tooltip,
 } from "@chakra-ui/react";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
+
 import { BiLike } from "react-icons/bi";
 import { BiComment } from "react-icons/bi";
 import React from "react";
@@ -17,10 +17,12 @@ import {
   handelLike,
   colorLikeIcon,
   colorCommentIcon,
+  toastAlert,
 } from "../utils/helper";
 import { useAuth } from "../hooks/useAuth";
 import CommentDrawer from "./CommentDrawer";
 import LikeList from "./LikeCommentList";
+import PopupMenu from "./PopupMenu";
 
 export default function LinkItem({
   title,
@@ -43,27 +45,32 @@ export default function LinkItem({
 
   const handelCommentIcon = () => {
     if (!user) {
-      toast({
-        title: "You are not logged in",
-        description: "Please login or create an account to  like or comment ",
-        status: "info",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      toastAlert(
+        toast,
+        "You are not logged in",
+        "Please login or create an account to comment",
+        "info"
+      );
       return;
     }
     onOpen();
   };
 
   return (
-    <Flex direction="column" bg="gray.100" w="250" justify="space-between">
+    <Flex direction="column" bg="gray.50" w="250" justify="space-between">
       <Box p="2">
         <Flex justifyContent="space-between" align="center">
           <Box fontSize="md" fontWeight="bold">
             {title}
           </Box>
-          <BiDotsHorizontalRounded />
+          <Tooltip
+            color="black"
+            shouldWrapChildren
+            bg="white"
+            label="Click here to delete or edit"
+          >
+            {user.uid === postedBy.id && <PopupMenu listId={id} />}
+          </Tooltip>
         </Flex>
 
         <Box fontSize="sm">{description}</Box>
@@ -84,7 +91,8 @@ export default function LinkItem({
       <Flex
         justify="space-between"
         align="baseline"
-        direction={{ base: "column", md: "row" }}
+        // direction={{ base: "column", xl: "row" }}
+        direction="column"
         p="2"
       >
         <HStack
@@ -93,53 +101,36 @@ export default function LinkItem({
           mt="2"
         >
           <HStack>
-            <Tooltip
-              color="black"
-              shouldWrapChildren
-              bg="white"
-              label="Clicke here to see like list"
+            <Text
+              onClick={onOpenLike}
+              fontSize="xs"
+              color="teal.300"
+              cursor="pointer"
+              _hover={{ color: "teal.100" }}
             >
-              <Text
-                onClick={onOpenLike}
-                fontSize="xs"
-                color="teal.300"
-                cursor="pointer"
-                _hover={{ color: "teal.100" }}
-              >
-                ({likes.length})
-              </Text>
-            </Tooltip>
+              ({likes.length})
+            </Text>
+
             <LikeList list={likes} onClose={onCloseLike} isOpen={isOpenLike} />
-            <Tooltip
-              color="black"
-              shouldWrapChildren
-              bg="white"
-              label="Click here to like this post"
-            >
+            <Box _hover={{ fill: "#0C87F5" }}>
               <BiLike
                 cursor="pointer"
                 onClick={() => handelLike(user, id, toast)}
                 fill={colorLikeIcon(likes, user).length && "#0C87F5"}
               />
-            </Tooltip>
+            </Box>
           </HStack>
           <HStack>
             <Text fontSize="xs" color="teal.300">
               ({comments.length})
             </Text>
-
-            <Tooltip
-              color="black"
-              shouldWrapChildren
-              bg="white"
-              label="Click here to post a comment"
-            >
+            <Box _hover={{ fill: "#0C87F5" }}>
               <BiComment
                 cursor="pointer"
                 onClick={handelCommentIcon}
                 fill={colorCommentIcon(comments, user).length && "#0C87F5"}
               />
-            </Tooltip>
+            </Box>
           </HStack>
         </HStack>
         <Box>

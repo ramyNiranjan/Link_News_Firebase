@@ -14,6 +14,7 @@ export default function SignUp() {
   const { handleSubmit, register, errors } = useForm({
     resolver: yupResolver(schemaSignUp),
   });
+
   const { signup } = useAuth();
   const history = useHistory();
   const formValues = ["Name", "Email", "Password", "Confirm Password"];

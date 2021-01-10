@@ -6,6 +6,15 @@ export function getDomain(url) {
 
 export const handelLike = (user, id, toast) => {
   const likeRef = firestore.collection("links").doc(id);
+  if (!user) {
+    toastAlert(
+      toast,
+      "You are not logged in",
+      "Please login or create an account to  like",
+      "info"
+    );
+    return;
+  }
   likeRef.get().then((doc) => {
     if (doc.exists) {
       const previousLikes = doc.data().likes;
@@ -84,4 +93,15 @@ export const colorLikeIcon = (likes, user) => {
 };
 export const colorCommentIcon = (comment, user) => {
   return comment.filter(({ commentedBy }) => commentedBy?.id === user.uid);
+};
+
+export const toastAlert = (toast, title, desc, status) => {
+  toast({
+    title: title,
+    description: desc,
+    status: status,
+    duration: 3000,
+    isClosable: true,
+    position: "top",
+  });
 };

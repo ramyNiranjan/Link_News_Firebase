@@ -11,6 +11,7 @@ function App() {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/create" component={CreateLink} />
+      <Route path="/edit/:id" component={CreateLink} />
       <Route path="/signIn" component={SignIn} />
       <Route path="/signUp" component={SignUp} />
       {/* <Route exact path="/" render={() => <Redirect to="/new/1" />} /> */}

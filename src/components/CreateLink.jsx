@@ -1,8 +1,8 @@
 import { Box, Button, Flex, Text, Stack } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { firestore } from "../firebase";
 import { useAuth } from "../hooks/useAuth";
 import { schemaCreateLink } from "../utils/validationSchema";
@@ -12,16 +12,52 @@ import Layout from "./layout/Layout";
 function CreateLink() {
   const { user } = useAuth();
   console.log(user);
-
+  const { id } = useParams();
+  const docRef = firestore.collection("links").doc(id);
+  const [idValue, setIdValue] = useState("");
   const { handleSubmit, register, errors } = useForm({
     resolver: yupResolver(schemaCreateLink),
   });
-
+  const [desc, setDesc] = useState("");
+  const [title, setTitle] = useState("");
+  const [link, setLink] = useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    setIdValue(id);
+    settingEditValue();
+  }, [id]);
+
+  const settingEditValue = () => {
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        const { description, link, title, createdAt } = doc.data();
+        console.log(description, link, title, createdAt);
+        setDesc(description);
+        setTitle(title);
+        setLink(link);
+      }
+    });
+  };
 
   const onSubmit = ({ Title, Description, Link }) => {
     console.log(Title, Description, Link);
     console.log(user);
+
+    if (idValue) {
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          docRef.update({
+            title: Title,
+            description: Description,
+            link: Link,
+          });
+        }
+      });
+      history.push("/");
+      return;
+    }
+
     const newTopic = {
       title: Title,
       description: Description,
@@ -53,17 +89,28 @@ function CreateLink() {
         mb="4"
       >
         <Text fontSize="2xl" align="center">
-          Create a Topic
+          {idValue ? "Edit the topic" : " Create a Topic"}
         </Text>
         <Stack spacing={3}>
-          <FormAtom name="Title" register={register} errors={errors} />
+          <FormAtom
+            defaultValue={idValue ? title : ""}
+            name="Title"
+            register={register}
+            errors={errors}
+          />
           <FormAtom
             name="Description"
             register={register}
             errors={errors}
             textArea
+            defaultValue={idValue ? desc : ""}
           />
-          <FormAtom name="Link" register={register} errors={errors} />
+          <FormAtom
+            defaultValue={idValue ? link : ""}
+            name="Link"
+            register={register}
+            errors={errors}
+          />
         </Stack>
         <Flex align="baseline" w="100%">
           <Button mt={4} colorScheme="teal" type="submit">

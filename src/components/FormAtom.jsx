@@ -7,12 +7,20 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-export default function FormAtom({ name, register, errors, textArea, file }) {
+export default function FormAtom({
+  name,
+  register,
+  errors,
+  textArea,
+  defaultValue,
+  file,
+}) {
   return (
     <FormControl isRequired zIndex="10">
       <FormLabel>{name}</FormLabel>
       {!textArea && (
         <Input
+          defaultValue={defaultValue}
           placeholder={name}
           ref={register}
           name={name}
@@ -24,6 +32,7 @@ export default function FormAtom({ name, register, errors, textArea, file }) {
         <Textarea
           ref={register}
           name={name}
+          defaultValue={defaultValue}
           placeholder="Keep it simple and write what in your mind"
         />
       )}

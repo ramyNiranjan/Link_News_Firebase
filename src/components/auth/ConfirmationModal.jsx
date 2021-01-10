@@ -19,15 +19,17 @@ export default function ConfirmationModal({
     <>
       <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent mt="20" mx="4">
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
 
           <ModalFooter>
-            <Button colorScheme="teal" mr={3} onClick={signoutClose}>
+            <Button bg="red.100" mr={3} onClick={signoutClose}>
               Yes
             </Button>
-            <Button onClick={onClose}>No</Button>
+            <Button bg="green.100" onClick={onClose}>
+              No
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -17,19 +17,19 @@ export default function LikeList({ list = [], isOpen, onClose }) {
         motionPreset="slideInBottom"
         onClose={onClose}
         isOpen={isOpen}
-        isCentered
       >
         <AlertDialogOverlay />
 
-        <AlertDialogContent>
+        <AlertDialogContent mt="20" mx="4">
           <AlertDialogHeader>Likes</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            <SimpleGrid minChildWidth="200px" spacing="10px">
-              {list &&
-                list.map(({ likedBy }) => (
-                  <Box key={likedBy.name}>{likedBy.name}</Box>
-                ))}
+            <SimpleGrid p="2" minChildWidth="200px" spacing="10px" bg="gray.50">
+              {list.length === 0
+                ? "There are no likes"
+                : list.map(({ likedBy }) => (
+                    <Box key={likedBy.name}>{likedBy.name}</Box>
+                  ))}
             </SimpleGrid>
           </AlertDialogBody>
         </AlertDialogContent>
