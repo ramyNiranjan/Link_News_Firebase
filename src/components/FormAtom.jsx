@@ -13,7 +13,6 @@ export default function FormAtom({
   errors,
   textArea,
   defaultValue,
-  file,
 }) {
   return (
     <FormControl isRequired zIndex="10">

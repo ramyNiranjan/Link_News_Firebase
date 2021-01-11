@@ -27,7 +27,7 @@ export default function DeletePopup({ isOpen, onClose, itemId }) {
           "success"
         );
       })
-      .catch((err) => {
+      .catch(() => {
         toastAlert(
           toast,
           "Error",

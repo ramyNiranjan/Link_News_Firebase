@@ -123,7 +123,8 @@ export default function LinkItem({
         </HStack>
         <Box>
           <Text as="span" mr="2" fontSize="sm" color="teal.600">
-            {/* {user.uid === postedBy.id ? "Me" : postedBy.name} */}
+            {/* future use
+            {user.uid === postedBy.id ? "Me" : postedBy.name} */}
             {postedBy.name}
           </Text>
           <Text as="span" fontSize="xs" color="gray.400">

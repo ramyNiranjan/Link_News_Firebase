@@ -34,8 +34,7 @@ function CreateLink() {
   const settingEditValue = () => {
     docRef.get().then((doc) => {
       if (doc.exists) {
-        const { description, link, title, createdAt } = doc.data();
-        console.log(description, link, title, createdAt);
+        const { description, link, title } = doc.data();
         setDesc(description);
         setTitle(title);
         setLink(link);
@@ -44,9 +43,6 @@ function CreateLink() {
   };
 
   const onSubmit = ({ Title, Description, Link }) => {
-    console.log(Title, Description, Link);
-    console.log(user);
-
     if (idValue) {
       docRef
         .get()
@@ -61,7 +57,7 @@ function CreateLink() {
           }
           history.push("/");
         })
-        .catch((err) => {
+        .catch(() => {
           toastAlert(toast, "Update error", "Please try again later", "error");
         });
 
@@ -84,7 +80,7 @@ function CreateLink() {
       .collection("links")
       .add(newTopic)
       .then(() => history.push("/"))
-      .catch((err) => {
+      .catch(() => {
         toastAlert(toast, "Create error", "Please try again later", "error");
       });
   };
