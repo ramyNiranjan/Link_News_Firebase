@@ -6,7 +6,6 @@ import useFirestore from "./hooks/useFirestore";
 
 export default function Home() {
   const { docs } = useFirestore("links");
-  console.log(docs);
   return (
     <Layout>
       <Box p="4" mt="4">
