@@ -30,7 +30,6 @@ export default function CommentDrawer({ isOpen, onClose, user, id, toast }) {
   //using useRef
   const handelFormValue = (e) => {
     e.preventDefault();
-    console.log(textInput.current.value.length);
     if (
       textInput.current.value.length >= 50 ||
       textInput.current.value.length === 0

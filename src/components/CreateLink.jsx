@@ -12,7 +12,6 @@ import Layout from "./layout/Layout";
 
 function CreateLink() {
   const { user } = useAuth();
-  console.log(user);
   const { id } = useParams();
   const docRef = firestore.collection("links").doc(id);
   const [idValue, setIdValue] = useState("");
