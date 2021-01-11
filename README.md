@@ -6,6 +6,7 @@ Link News is a platform where all users can share their daily news with others b
 - React
 - Firebase(auth,database)
 - Chakra ui
+- React hook form and validation with yup
 
 # How to use this platform is very easy
 - Create an account
