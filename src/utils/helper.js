@@ -1,4 +1,5 @@
 import { firestore } from "../firebase";
+import formatDistance from "date-fns/formatDistance";
 
 export function getDomain(url) {
   return url.replace(/^https?:\/\//i, "");
@@ -103,5 +104,11 @@ export const toastAlert = (toast, title, desc, status) => {
     duration: 3000,
     isClosable: true,
     position: "top",
+  });
+};
+
+export const convertToReadableDate = (data) => {
+  return formatDistance(new Date(data), Date.now(), {
+    addSuffix: true,
   });
 };

@@ -9,7 +9,11 @@ import {
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { firestore } from "../firebase";
-import { handelCommentEdit, handelCommentDelete } from "../utils/helper";
+import {
+  handelCommentEdit,
+  handelCommentDelete,
+  convertToReadableDate,
+} from "../utils/helper";
 
 export default function CommentItem({
   commentedBy: { name, msg, id, createdAt },
@@ -68,7 +72,7 @@ export default function CommentItem({
             {id === user.uid ? "Me" : name}
           </Text>
         </Text>
-        <Text>3 hours ago</Text>
+        <Text>{convertToReadableDate(createdAt)}</Text>
         {id === user.uid && (
           <Flex>
             <Text

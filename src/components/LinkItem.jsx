@@ -18,6 +18,7 @@ import {
   colorLikeIcon,
   colorCommentIcon,
   toastAlert,
+  convertToReadableDate,
 } from "../utils/helper";
 import { useAuth } from "../hooks/useAuth";
 import CommentDrawer from "./CommentDrawer";
@@ -63,14 +64,8 @@ export default function LinkItem({
           <Box fontSize="md" fontWeight="bold">
             {title}
           </Box>
-          <Tooltip
-            color="black"
-            shouldWrapChildren
-            bg="white"
-            label="Click here to delete or edit"
-          >
-            {user.uid === postedBy.id && <PopupMenu listId={id} />}
-          </Tooltip>
+
+          {user.uid === postedBy.id && <PopupMenu listId={id} />}
         </Flex>
 
         <Box fontSize="sm">{description}</Box>
@@ -88,13 +83,7 @@ export default function LinkItem({
         </Box>
       </Box>
 
-      <Flex
-        justify="space-between"
-        align="baseline"
-        // direction={{ base: "column", xl: "row" }}
-        direction="column"
-        p="2"
-      >
+      <Flex justify="space-between" align="baseline" direction="column" p="2">
         <HStack
           spacing="10px"
           divider={<StackDivider borderColor="gray.200" />}
@@ -135,10 +124,11 @@ export default function LinkItem({
         </HStack>
         <Box>
           <Text as="span" mr="2" fontSize="sm" color="gray.400">
+            {/* {user.uid === postedBy.id ? "Me" : postedBy.name} */}
             {postedBy.name}
           </Text>
           <Text as="span" fontSize="xs" color="gray.400">
-            3 hours ago
+            {convertToReadableDate(createdAt)}
           </Text>
         </Box>
       </Flex>

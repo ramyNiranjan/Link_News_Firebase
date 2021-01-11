@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Text, Stack } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Stack, useToast } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 import { firestore } from "../firebase";
 import { useAuth } from "../hooks/useAuth";
+import { toastAlert } from "../utils/helper";
 import { schemaCreateLink } from "../utils/validationSchema";
 import FormAtom from "./FormAtom";
 import Layout from "./layout/Layout";
@@ -22,6 +23,7 @@ function CreateLink() {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const history = useHistory();
+  const toast = useToast();
 
   useEffect(() => {
     setIdValue(id);
@@ -46,16 +48,23 @@ function CreateLink() {
     console.log(user);
 
     if (idValue) {
-      docRef.get().then((doc) => {
-        if (doc.exists) {
-          docRef.update({
-            title: Title,
-            description: Description,
-            link: Link,
-          });
-        }
-      });
-      history.push("/");
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            docRef.update({
+              title: Title,
+              description: Description,
+              link: Link,
+              createdAt: Date.now(),
+            });
+          }
+          history.push("/");
+        })
+        .catch((err) => {
+          toastAlert(toast, "Update error", "Please try again later", "error");
+        });
+
       return;
     }
 
@@ -75,7 +84,9 @@ function CreateLink() {
       .collection("links")
       .add(newTopic)
       .then(() => history.push("/"))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toastAlert(toast, "Create error", "Please try again later", "error");
+      });
   };
 
   return (
