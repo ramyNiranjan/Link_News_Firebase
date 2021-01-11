@@ -6,7 +6,7 @@ import Layout from "./layout/Layout";
 export default function About() {
   return (
     <Layout>
-      <Box p="6" size="3xl">
+      <Box p="6" size="3xl" letterSpacing="1">
         <Heading as="h1" color="teal.300" align="center" mb="4">
           Welcome
         </Heading>
@@ -22,7 +22,7 @@ export default function About() {
           can be easily shared. At the moment it looks very primitive but in the
           near future I will add more features and improve UX more.
         </Box>
-        <Box>
+        <Box mb="4">
           <Text fontWeight="bold" fontSize="lg">
             How to use this platform is very easy🤷‍♂️
           </Text>
@@ -43,9 +43,18 @@ export default function About() {
             </ListItem>
           </UnorderedList>
         </Box>
+        <Box>
+          <Text fontWeight="bold" fontSize="lg">
+            Features ⚙⚒⚙
+          </Text>
+          <UnorderedList>
+            <ListItem>Create,delete,update feeds📝</ListItem>
+            <ListItem>Like,unlike,post and upadate comment👍✍</ListItem>
+          </UnorderedList>
+        </Box>
         <Box mt="4">
           <Text as="mark">
-            Finally, dont forget spread word about my platform 😉😍
+            Finally, do not forget to spread the word about my platform 😉😍
           </Text>
         </Box>
       </Box>
