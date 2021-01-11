@@ -46,6 +46,16 @@ export default function BurgerMenu() {
               </ChakraLink>
             </MenuItem>
           )}
+          <MenuItem>
+            <ChakraLink
+              to="/about"
+              cursor="pointer"
+              w="100%"
+              _hover={{ color: "teal.200" }}
+            >
+              About
+            </ChakraLink>
+          </MenuItem>
           {user ? (
             <MenuItem>
               <Box

@@ -6,7 +6,6 @@ import {
   StackDivider,
   useDisclosure,
   useToast,
-  Tooltip,
 } from "@chakra-ui/react";
 
 import { BiLike } from "react-icons/bi";
@@ -123,7 +122,7 @@ export default function LinkItem({
           </HStack>
         </HStack>
         <Box>
-          <Text as="span" mr="2" fontSize="sm" color="gray.400">
+          <Text as="span" mr="2" fontSize="sm" color="teal.600">
             {/* {user.uid === postedBy.id ? "Me" : postedBy.name} */}
             {postedBy.name}
           </Text>

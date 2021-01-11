@@ -48,7 +48,14 @@ export default function Header() {
               CreateTopic
             </ChakraLink>
           )}
-
+          <ChakraLink
+            to="/about"
+            cursor="pointer"
+            mr="6"
+            _hover={{ color: "teal.200" }}
+          >
+            About
+          </ChakraLink>
           {user ? (
             <Box
               as="span"
