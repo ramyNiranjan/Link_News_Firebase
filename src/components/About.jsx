@@ -1,9 +1,11 @@
 import { Box, Heading, ListItem, UnorderedList, Text } from "@chakra-ui/react";
 import React from "react";
+import { useAuth } from "../hooks/useAuth";
 import { ChakraLink } from "./layout/Header";
 import Layout from "./layout/Layout";
 
 export default function About() {
+  const { user } = useAuth();
   return (
     <Layout>
       <Box p="6" size="3xl" letterSpacing="1">
@@ -33,7 +35,7 @@ export default function About() {
               <ChakraLink
                 _hover={{ color: "teal.500", textDecoration: "underLine" }}
                 color="teal.200"
-                to="/create"
+                to={user ? "/create" : "/signIn"}
               >
                 Create topic
               </ChakraLink>
